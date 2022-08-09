@@ -2,7 +2,7 @@ import 'package:app_relaxante/components/cards/card.dart';
 import 'package:app_relaxante/components/progress.dart';
 import 'package:app_relaxante/components/cards/gridCards.dart';
 import 'package:app_relaxante/database/dao/sound_dao.dart';
-import 'package:app_relaxante/form_sound.dart';
+import 'package:app_relaxante/screens/form_sound.dart';
 import 'package:app_relaxante/models/sound.dart';
 import 'package:app_relaxante/screens/player.dart';
 import 'package:app_relaxante/theme.dart';
@@ -78,9 +78,7 @@ class _ExplorePageState extends State<ExplorePage> {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormSound();
           })).then((value){
-            setState(() {
-
-            });
+            setState(() {});
           });
         },
       ),

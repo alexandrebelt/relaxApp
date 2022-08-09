@@ -19,11 +19,11 @@ class LocalStorageRepository extends BaseLocalStorage{
   @override
   Future<void> addSoundToFavourite(Box box, Sound sound) async {
     await box.put(sound.id, sound);
+    box.putAt(sound.id, sound.favourite = 1);
   }
 
   @override
   Future<void> removeSoundFromFavourite(Box box, Sound sound) async {
     await box.delete(sound.id);
   }
-
 }

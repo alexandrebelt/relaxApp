@@ -139,15 +139,15 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                             setState(() {
                               isFavourite = true;
                               widget.dao.update(value1);
+                              context.read<FavouriteBloc>().add(AddFavouriteSound(widget.sound));
                             });
                               final snackBar = SnackBar(content: Text('Added to your favourites'));
-                              context.read<FavouriteBloc>().add(AddFavouriteSound(widget.sound));
                               ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           } else {
                             setState(() {
                               isFavourite = false;
-                            widget.dao.update(value0);
-                            context.read<FavouriteBloc>().add(RemoveFavouriteSound(widget.sound));
+                              widget.dao.update(value0);
+                              context.read<FavouriteBloc>().add(RemoveFavouriteSound(widget.sound));
                             });
                             final snackBar = SnackBar(content: Text('Removed from your favourites'));
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);

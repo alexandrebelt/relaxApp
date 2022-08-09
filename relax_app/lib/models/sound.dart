@@ -14,7 +14,7 @@ class Sound{
   @HiveField(4)
   final String audio;
   @HiveField(5)
-  final int favourite;
+  int favourite;
 
   Sound(
       this.id,

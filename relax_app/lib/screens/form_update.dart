@@ -44,7 +44,7 @@ class _FormUpdateSoundState extends State<FormUpdateSound> {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                Text('Editar card'),
+                Text('Editar card (ADMIN ONLY)'),
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(labelText: widget.sound.name),

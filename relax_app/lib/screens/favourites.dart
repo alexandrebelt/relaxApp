@@ -2,8 +2,6 @@
 import 'package:app_relaxante/components/cards/card.dart';
 import 'package:app_relaxante/components/progress.dart';
 import 'package:app_relaxante/database/dao/sound_dao.dart';
-import 'package:app_relaxante/form_sound.dart';
-import 'package:app_relaxante/models/sound.dart';
 import 'package:app_relaxante/screens/blocs/favourite_bloc.dart';
 import 'package:app_relaxante/screens/blocs/favourite_state.dart';
 import 'package:app_relaxante/screens/player.dart';
