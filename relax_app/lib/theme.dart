@@ -22,7 +22,6 @@ ThemeData themeApp() {
 
 AppBar CustomAppBar(header) {
   String text = header;
-
    return AppBar(
       centerTitle: false,
       title: Text(text,
@@ -32,3 +31,4 @@ AppBar CustomAppBar(header) {
         ),
       ));
 }
+

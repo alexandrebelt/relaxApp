@@ -22,30 +22,33 @@ class Cards extends StatelessWidget{
       ),
 
       //ADMIN ITEM for UPDATE
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-              color: iconPrimary,
-            borderRadius: BorderRadius.all(Radius.circular(100))
-      ),
-              child: IconButton(onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> FormUpdateSound(sound)));
-              }, icon: Icon(Icons.edit, color: mainBackground, size: 20,)),
+      child: InkWell(
+        onTap: () => onTap(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                color: iconPrimary,
+              borderRadius: BorderRadius.all(Radius.circular(100))
+        ),
+                child: IconButton(onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> FormUpdateSound(sound)));
+                }, icon: Icon(Icons.edit, color: mainBackground, size: 20,)),
+              ),
             ),
-          ),
-          //------
-
-
-          ListTile(
-            onTap: () => onTap(),
-            title: Text(sound.name),
-            subtitle: Text(sound.description),
-          ),
-        ],
+            Container(
+              color: mainBackground.withOpacity(0.6),
+              child: ListTile(
+                textColor: iconPrimary,
+                title: Text(sound.name),
+                subtitle: Text(sound.description, style:TextStyle(fontSize: 12)),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -126,32 +126,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                             ? Icons.favorite_outlined
                             : Icons.favorite_outline_outlined),
                         onPressed: () {
-                          final id = widget.sound.id;
-                          final name = widget.sound.name;
-                          final desc = widget.sound.description;
-                          final image = widget.sound.image;
-                          final audio = widget.sound.audio;
-
-                          final value1 = Sound(id, name, desc, image, audio, 1);
-                          final value0 = Sound(id, name, desc, image, audio, 0);
-
-                          if(isFavourite != true){
-                            setState(() {
-                              isFavourite = true;
-                              widget.dao.update(value1);
-                              context.read<FavouriteBloc>().add(AddFavouriteSound(widget.sound));
-                            });
-                              final snackBar = SnackBar(content: Text('Added to your favourites'));
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          } else {
-                            setState(() {
-                              isFavourite = false;
-                              widget.dao.update(value0);
-                              context.read<FavouriteBloc>().add(RemoveFavouriteSound(widget.sound));
-                            });
-                            final snackBar = SnackBar(content: Text('Removed from your favourites'));
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          }
+                          _favouriteAction(context);
                         },
                         color: iconPrimary,
                         iconSize: 35,
@@ -266,6 +241,35 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
           ],
         )
     );
+  }
+// Favourite Actions
+  void _favouriteAction(BuildContext context) {
+    final id = widget.sound.id;
+    final name = widget.sound.name;
+    final desc = widget.sound.description;
+    final image = widget.sound.image;
+    final audio = widget.sound.audio;
+
+    final value1 = Sound(id, name, desc, image, audio, 1);
+    final value0 = Sound(id, name, desc, image, audio, 0);
+
+    if(isFavourite != true){
+      setState(() {
+        isFavourite = true;
+        widget.dao.update(value1);
+        context.read<FavouriteBloc>().add(AddFavouriteSound(widget.sound));
+      });
+        final snackBar = SnackBar(content: Text('Added to your favourites'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      setState(() {
+        isFavourite = false;
+        widget.dao.update(value0);
+        context.read<FavouriteBloc>().add(RemoveFavouriteSound(widget.sound));
+      });
+      final snackBar = SnackBar(content: Text('Removed from your favourites'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
 //Verify if its a favourite

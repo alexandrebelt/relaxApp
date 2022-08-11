@@ -20,7 +20,42 @@ class _ExplorePageState extends State<ExplorePage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: CustomAppBar('Explore Cards'),
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right:25.0),
+            child: GestureDetector(
+              onTap: (){
+                showDialog(
+                    context: context, builder: (contextDialog){
+                  return Column(
+                    children: [
+                      Container(
+                        color: iconPrimary,
+                        height: 50,
+                        width: double.maxFinite,
+                        child: Row(
+                          children: [
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                });
+              },
+              child: Icon(Icons.search, color: iconPrimary, size: 35),
+            ),
+          )
+        ],
+          centerTitle: false,
+          title: Text(
+            'Explore Cards',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 35,
+            ),
+          )
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
         child: FutureBuilder(
@@ -54,9 +89,8 @@ class _ExplorePageState extends State<ExplorePage> {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return RelaxPlayer(sounds[index]);
-                        })).then((value){
-                          setState(() {
-                          });
+                        })).then((value) {
+                          setState(() {});
                         });
                       },
                     );
@@ -77,7 +111,7 @@ class _ExplorePageState extends State<ExplorePage> {
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return FormSound();
-          })).then((value){
+          })).then((value) {
             setState(() {});
           });
         },
