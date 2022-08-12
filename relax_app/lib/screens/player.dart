@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:app_relaxante/components/dialogs/fav_removed.dart';
 import 'package:app_relaxante/database/local_storage_repository.dart';
 import 'package:app_relaxante/screens/blocs/favourite_event.dart';
 import 'package:app_relaxante/screens/blocs/favourite_state.dart';
+import 'package:app_relaxante/components/dialogs/fav_added.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:app_relaxante/components/progress.dart';
@@ -30,12 +32,11 @@ class RelaxPlayer extends StatefulWidget {
 }
 
 class _RelaxPlayerState extends State<RelaxPlayer> {
-  var accessBox = LocalStorageRepository();
-  int _counter = 0;
+  var accessBox = LocalStorageRepository(); //Hive dB Repo
+  int _counter = 0;   //Timer
   Timer _timer;
   bool _timerVisible = false;
-  bool isFavourite;
-
+  bool isFavourite;   //Favourite
 
   void initState() {
     isFavourite = verifav();
@@ -70,6 +71,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
 
   @override
   Widget build(BuildContext context) {
+
     String timeCount = formatTime(_counter);
     // TODO: implement build
     return Scaffold(
@@ -119,8 +121,6 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                 children: [
                   BlocBuilder<FavouriteBloc, FavouriteState>(
                     builder: (context, state) {
-
-                      print(isFavourite);
                       return IconButton(
                         icon: Icon(isFavourite
                             ? Icons.favorite_outlined
@@ -254,23 +254,29 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
     final value0 = Sound(id, name, desc, image, audio, 0);
 
     if(isFavourite != true){
+
       setState(() {
         isFavourite = true;
         widget.dao.update(value1);
         context.read<FavouriteBloc>().add(AddFavouriteSound(widget.sound));
       });
-        final snackBar = SnackBar(content: Text('Added to your favourites'));
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          showDialog(context: context, builder: (contextDialog){
+            Future.delayed(Duration(milliseconds: 1500), ()=> Navigator.pop(context));
+          return AddedToFavourites();
+        });
     } else {
       setState(() {
         isFavourite = false;
         widget.dao.update(value0);
         context.read<FavouriteBloc>().add(RemoveFavouriteSound(widget.sound));
       });
-      final snackBar = SnackBar(content: Text('Removed from your favourites'));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      showDialog(context: context, builder: (contextDialog){
+        Future.delayed(Duration(milliseconds: 1500), ()=> Navigator.pop(context));
+        return RemovedFromFavourites();
+      });
     }
   }
+
 
 //Verify if its a favourite
   bool verifav() {

@@ -102,7 +102,7 @@ class _ExplorePageState extends State<ExplorePage> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton.small(
+      floatingActionButton: FloatingActionButton(
         backgroundColor: iconPrimary,
         child: Icon(
           Icons.add,
