@@ -40,11 +40,11 @@ class Cards extends StatelessWidget{
               ),
             ),
             Container(
-              color: mainBackground.withOpacity(0.6),
+              color: iconPrimary.withOpacity(0.5),
               child: ListTile(
-                textColor: iconPrimary,
+                textColor: mainBackground,
                 title: Text(sound.name),
-                subtitle: Text(sound.description, style:TextStyle(fontSize: 12)),
+                subtitle: Text(sound.description, style:TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
               ),
             ),
           ],

@@ -81,7 +81,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
               padding: const EdgeInsets.only(top: 10.0, right: 20),
               child: GestureDetector(
                 onTap: () {
-                  widget.dao.delete(widget.sound.id);
+                 // widget.dao.delete(widget.sound.id);
                   Navigator.pop(context);
                   setState(() {
                   });
@@ -115,7 +115,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 25.0),
+              padding: const EdgeInsets.only(top: 35.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -192,17 +192,17 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                                         width: 200,
                                         child: Material(
                                           borderRadius: BorderRadius.all(Radius.circular(25)),
-                                          color: mainBackground,
+                                          color: Colors.black.withOpacity(0.9),
                                           child: Padding(
                                             padding: const EdgeInsets.all(15.0),
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(bottom: 20.0),
+                                                  padding: const EdgeInsets.only(bottom: 15.0),
                                                   child: Text('Timer',
                                                       style: TextStyle(
                                                         color: iconPrimary,
-                                                        fontSize: 20,
+                                                        fontSize: 25,
                                                         fontWeight: FontWeight.bold,
                                                       )),
                                                 ),
