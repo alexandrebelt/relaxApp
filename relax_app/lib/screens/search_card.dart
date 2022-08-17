@@ -29,10 +29,11 @@ class _SearchCardState extends State<SearchCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar('Search Cards'),
+      appBar: AppBar(title:_searchBar()),
       body: ListView.builder(
+        padding: EdgeInsets.only(right:25, left:25),
         itemBuilder: (context, index){
-          return index == 0 ? _searchBar() : _listSounds(index-1, context);
+          return index == 0 ? Text('') : _listSounds(index-1, context);
         },
         itemCount: _soundsForDisplay.length+1,
       )
@@ -40,28 +41,29 @@ class _SearchCardState extends State<SearchCard> {
   }
 
   _searchBar() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 25, left: 25, top:0,  bottom: 10),
+    return SizedBox(
+      height: 50,
       child: TextField(
+        textAlignVertical: TextAlignVertical.bottom,
         style: TextStyle(
           color: iconPrimary,
-          fontSize: 23,
+          fontSize: 18,
         ),
             controller: _searchController,
             cursorColor: iconPrimary,
             decoration: InputDecoration(
-              prefix: Padding(
-                padding: const EdgeInsets.only(right:10.0 , top: 5),
-                child: Icon(Icons.search, color: iconPrimary, size: 25),
+              hintText: 'Search Cards',
+              hintStyle: TextStyle(
+                color: iconPrimary.withOpacity(0.4),
+                fontSize: 18,
               ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: iconPrimary),
-                  borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide:BorderSide(color: iconPrimary.withOpacity(0.4)),
-                  borderRadius: BorderRadius.all(Radius.circular(20))
-              ),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(
+                color:iconPrimary.withOpacity(0.4)
+              )),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(
+                color: iconPrimary,
+              )),
+              prefixIcon: Icon(Icons.search, color: iconPrimary, size: 25),
             ),
         onChanged: (text){
               text = text.toLowerCase();
@@ -96,7 +98,9 @@ class _SearchCards extends StatelessWidget{
     return ListTile(
       onTap: () => onTap(),
       textColor: iconPrimary,
-      leading: Image.network(sound.image),
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+          child: Image.network(sound.image)),
       title: Text(sound.name.toString()),
       subtitle: Text(sound.description),
     );

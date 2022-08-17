@@ -8,6 +8,7 @@ abstract class FavouriteState extends Equatable{
   @override
   List<Object> get props => [];
 }
+
 class FavouriteLoading extends FavouriteState {}
 
 class FavouriteLoaded extends FavouriteState {

@@ -2,6 +2,7 @@ import 'package:app_relaxante/components/cards/card.dart';
 import 'package:app_relaxante/components/progress.dart';
 import 'package:app_relaxante/components/cards/gridCards.dart';
 import 'package:app_relaxante/database/dao/sound_dao.dart';
+import 'package:app_relaxante/models/defaultSounds.dart';
 import 'package:app_relaxante/screens/form_sound.dart';
 import 'package:app_relaxante/models/sound.dart';
 import 'package:app_relaxante/screens/player.dart';
@@ -27,6 +28,7 @@ class _ExplorePageState extends State<ExplorePage> {
             padding: const EdgeInsets.only(right:25.0),
             child: GestureDetector(
               onTap: (){
+                //defaultSounds();
                 Navigator.push(context, MaterialPageRoute(builder: (context){
                   return SearchCard();
                 }));

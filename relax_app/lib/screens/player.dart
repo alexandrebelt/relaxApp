@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:app_relaxante/components/dialogs/fav_removed.dart';
 import 'package:app_relaxante/database/local_storage_repository.dart';
+import 'package:app_relaxante/notification_service.dart';
 import 'package:app_relaxante/screens/blocs/favourite_event.dart';
 import 'package:app_relaxante/screens/blocs/favourite_state.dart';
 import 'package:app_relaxante/components/dialogs/fav_added.dart';
@@ -33,6 +34,7 @@ class RelaxPlayer extends StatefulWidget {
 
 class _RelaxPlayerState extends State<RelaxPlayer> {
   var accessBox = LocalStorageRepository(); //Hive dB Repo
+  LocalNotificationService notify= LocalNotificationService();
   int _counter = 0;   //Timer
   Timer _timer;
   bool _timerVisible = false;
@@ -206,7 +208,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                                                         fontWeight: FontWeight.bold,
                                                       )),
                                                 ),
-                                                OptionTimer('15 min', onTap: () => setTimer(900)),
+                                                OptionTimer('15 min', onTap: () => setTimer(3)),
                                                 OptionTimer('30 min', onTap: () => setTimer(1800)),
                                                 OptionTimer('1h', onTap: () => setTimer(3600)),
                                                 OptionTimer('5h', onTap: () => setTimer(18000)),
@@ -310,6 +312,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
           _timerVisible = false;
           _timer.cancel();
           widget.audioPlayer.stop();
+          notify.showNotification(0, 'Time is up', 'We turned off your card');
         }
       });
     });

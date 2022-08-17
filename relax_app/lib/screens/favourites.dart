@@ -32,6 +32,11 @@ class _FavouriteCardsState extends State<FavouriteCards> {
               return Progress();
             }
             if(state is FavouriteLoaded){
+              if(state.favourite.sounds.length == 0){
+                return Center(child: Text('No Cards added yet.', style:TextStyle(
+                  fontSize:20,
+                )));
+              }
               return GridView.count(
                 primary: true,
                 crossAxisCount: 2,

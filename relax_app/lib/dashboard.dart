@@ -1,5 +1,6 @@
 import 'package:app_relaxante/screens/favourites.dart';
 import 'package:app_relaxante/screens/explore.dart';
+import 'package:app_relaxante/screens/settings.dart';
 import 'package:app_relaxante/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _ContainerContentState extends State<ContainerContent> {
   final List<Widget> _screens = [
     FavouriteCards(),
     ExplorePage(),
-    ExplorePage(),
+    Settings(),
   ];
   @override
   Widget build(BuildContext context) {
