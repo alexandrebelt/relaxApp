@@ -17,7 +17,7 @@ void defaultSounds(){
       0,
       'Brown Noise',
       'Brown noise for sleep',
-      'https://images.unsplash.com/photo-1525939864518-b53937989bbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1587&q=80',
+      'https://images.unsplash.com/photo-1545132147-d037e6c54cfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGFpcnBsYW5lfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
       'https://assets.mixkit.co/sfx/preview/mixkit-intense-rain-loop-1246.mp3',
       0)
   );
@@ -35,6 +35,14 @@ void defaultSounds(){
       'Thunder is coming',
       'https://images.unsplash.com/photo-1516410529446-2c777cb7366d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
       'https://www.freesoundslibrary.com/wp-content/uploads/2021/04/thunder-and-rain-sound-effect.mp3',
+      0)
+  );
+  dao.save(Sound(
+      0,
+      'Cassete',
+      'The cassete noise',
+      'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+      'https://d9olupt5igjta.cloudfront.net/samples/sample_files/104726/a8781b0041c331a88601afe2179b626c7183b69e/mp3/_Cassette_Noise.mp3?',
       0)
   );
 }

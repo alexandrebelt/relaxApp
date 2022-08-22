@@ -11,7 +11,6 @@ import 'package:app_relaxante/components/progress.dart';
 import 'package:app_relaxante/database/dao/sound_dao.dart';
 import 'package:app_relaxante/models/sound.dart';
 import 'package:app_relaxante/screens/blocs/favourite_bloc.dart';
-import 'package:app_relaxante/screens/controls/settings.dart';
 import 'package:app_relaxante/screens/controls/timer/timer.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
@@ -83,7 +82,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
               padding: const EdgeInsets.only(top: 10.0, right: 20),
               child: GestureDetector(
                 onTap: () {
-                 // widget.dao.delete(widget.sound.id);
+                 widget.dao.delete(widget.sound.id);
                   Navigator.pop(context);
                   setState(() {
                   });
@@ -208,7 +207,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                                                         fontWeight: FontWeight.bold,
                                                       )),
                                                 ),
-                                                OptionTimer('15 min', onTap: () => setTimer(3)),
+                                                OptionTimer('15 min', onTap: () => setTimer(15)),
                                                 OptionTimer('30 min', onTap: () => setTimer(1800)),
                                                 OptionTimer('1h', onTap: () => setTimer(3600)),
                                                 OptionTimer('5h', onTap: () => setTimer(18000)),

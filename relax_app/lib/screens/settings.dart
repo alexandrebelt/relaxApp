@@ -30,11 +30,8 @@ class _SettingsState extends State<Settings> {
           padding: const EdgeInsets.only(left: 25, right: 25),
           child: ListView(
             children: [
-              TextButton(
-                child: Text('Notificação'),
-                onPressed: () => service.showNotification(0, 'vai', 'caga'),
-              ),
-              _SettingSwitch('Light mode'),
+              _SettingSwitch('Light mode (Switch test)'),
+              _SettingOption('Notification test', onTap: () => service.showNotification(0, 'Test', 'Notification'),),
               _SettingOption('Rate app in stores'),
               _SettingOption('Suggest features'),
               _SettingOption('Share Liminal'),
@@ -46,18 +43,21 @@ class _SettingsState extends State<Settings> {
 
 class _SettingOption extends StatelessWidget {
   final String titleOption;
+  final Function onTap;
 
-  _SettingOption(this.titleOption);
+  _SettingOption(this.titleOption, {@required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListTile(
+      onTap: () => onTap(),
       title: Center(
         child: Text(
           titleOption,
           style: TextStyle(
             color: iconPrimary,
+            fontSize: 18,
           ),
         ),
       ),

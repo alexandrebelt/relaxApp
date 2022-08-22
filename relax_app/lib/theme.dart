@@ -16,6 +16,11 @@ ThemeData themeApp() {
     snackBarTheme: SnackBarThemeData(
       backgroundColor: mainDark,
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: TextButton.styleFrom(
+        backgroundColor: mainBackground
+      )
+    ),
     textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           primary: Colors.white,

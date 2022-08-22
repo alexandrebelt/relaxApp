@@ -101,7 +101,7 @@ class _SearchCards extends StatelessWidget{
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(10),
           child: Image.network(sound.image)),
-      title: Text(sound.name.toString()),
+      title: Text(sound.name.toString(),style: TextStyle(fontSize: 18),),
       subtitle: Text(sound.description),
     );
   }
