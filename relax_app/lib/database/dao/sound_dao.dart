@@ -81,11 +81,11 @@ class SoundDao{
   Future<List<Sound>> findFavs() async {
     final Database db = await getDatabase();
     final List<Map<String, dynamic>> maps = await db.query(_tableName);
-    List<Sound> sounds = _toListFav(maps);
+    List<Sound> sounds = _toListFav(maps)!;
     return sounds;
   }
 
-  List<Sound> _toListFav(List<Map<String, dynamic>> maps) {
+  List<Sound> ?_toListFav(List<Map<String, dynamic>> maps) {
     final List<Sound> sounds = [];
     for (Map<String, dynamic> map in maps) {
       if(_favourite != '0'){

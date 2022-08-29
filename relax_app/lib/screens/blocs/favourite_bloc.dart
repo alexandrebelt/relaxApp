@@ -9,7 +9,7 @@ import 'package:hive/hive.dart';
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState>{
   final LocalStorageRepository _localStorageRepository;
   FavouriteBloc({
-    LocalStorageRepository localStorageRepository,
+    required LocalStorageRepository localStorageRepository,
 }) : _localStorageRepository = localStorageRepository,
         super(FavouriteLoading());
 

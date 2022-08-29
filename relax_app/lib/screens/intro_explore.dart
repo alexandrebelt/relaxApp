@@ -7,7 +7,7 @@ class IntroExplore extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: iconPrimary,
+      backgroundColor: offWhite,
       body: Align(
         alignment: Alignment.center,
         child: Container(

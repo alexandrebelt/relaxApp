@@ -12,8 +12,8 @@ class SearchCard extends StatefulWidget{
 class _SearchCardState extends State<SearchCard> {
   final TextEditingController _searchController = TextEditingController();
   final SoundDao dao = SoundDao();
-  List<Sound> _sounds = List<Sound>();
-  List<Sound> _soundsForDisplay = List<Sound>();
+  List<Sound> _sounds = <Sound>[];
+  List<Sound> _soundsForDisplay = <Sound>[];
 
   @override
   void initState(){
@@ -46,24 +46,24 @@ class _SearchCardState extends State<SearchCard> {
       child: TextField(
         textAlignVertical: TextAlignVertical.bottom,
         style: TextStyle(
-          color: iconPrimary,
+          color: offWhite,
           fontSize: 18,
         ),
             controller: _searchController,
-            cursorColor: iconPrimary,
+            cursorColor: offWhite,
             decoration: InputDecoration(
               hintText: 'Search Cards',
               hintStyle: TextStyle(
-                color: iconPrimary.withOpacity(0.4),
+                color: offWhite.withOpacity(0.4),
                 fontSize: 18,
               ),
               enabledBorder: OutlineInputBorder(borderSide: BorderSide(
-                color:iconPrimary.withOpacity(0.4)
+                color:offWhite.withOpacity(0.4)
               )),
               focusedBorder: OutlineInputBorder(borderSide: BorderSide(
-                color: iconPrimary,
+                color: offWhite,
               )),
-              prefixIcon: Icon(Icons.search, color: iconPrimary, size: 25),
+              prefixIcon: Icon(Icons.search, color: offWhite, size: 25),
             ),
         onChanged: (text){
               text = text.toLowerCase();
@@ -91,16 +91,24 @@ class _SearchCardState extends State<SearchCard> {
 class _SearchCards extends StatelessWidget{
   final Sound sound;
   final Function onTap;
-  _SearchCards(this.sound, {@required this.onTap});
+  _SearchCards(this.sound, {required this.onTap});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ListTile(
       onTap: () => onTap(),
-      textColor: iconPrimary,
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-          child: Image.network(sound.image)),
+      textColor: offWhite,
+      leading: Container(
+        height: 100,
+        width: 35,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          image: DecorationImage(
+            image: NetworkImage(sound.image),
+            fit: BoxFit.cover,
+          )
+        )
+      ),
       title: Text(sound.name.toString(),style: TextStyle(fontSize: 18),),
       subtitle: Text(sound.description),
     );

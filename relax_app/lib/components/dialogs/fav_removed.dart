@@ -8,7 +8,7 @@ class RemovedFromFavourites extends StatefulWidget {
 
 class _RemovedFromFavouritesState extends State<RemovedFromFavourites> {
   double _size = 0;
-  double _updateBox() {
+  double ?_updateBox() {
     setState(() {
       _size = 4;
     });
@@ -42,7 +42,7 @@ class _RemovedFromFavouritesState extends State<RemovedFromFavourites> {
               Padding(
                 padding: const EdgeInsets.only(bottom:40.0),
                 child: Text('Removed from My Cards', textAlign: TextAlign.center,
-                    style: TextStyle(color: iconPrimary,fontSize: 22)
+                    style: TextStyle(color: offWhite,fontSize: 22)
                 ),
               ),
               AnimatedScale(
@@ -51,7 +51,7 @@ class _RemovedFromFavouritesState extends State<RemovedFromFavourites> {
                 curve: Curves.bounceOut,
                 child: Icon(
                   Icons.heart_broken,
-                  color: iconPrimary,
+                  color: offWhite,
                 ),
               ),
             ],

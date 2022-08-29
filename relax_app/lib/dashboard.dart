@@ -26,10 +26,7 @@ class _ContainerContentState extends State<ContainerContent> {
     return Scaffold(
       body: _screens[_index],
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: iconPrimary,
-        iconSize: 30,
-        unselectedItemColor: iconPrimary,
-        backgroundColor: Colors.black26,
+
         currentIndex: _index,
         onTap: tabTap,
         elevation: 0,

@@ -9,6 +9,7 @@ import 'package:app_relaxante/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,13 +31,20 @@ class RelaxApp extends StatelessWidget {
             localStorageRepository: LocalStorageRepository(),
           )..add(StartFavourite()),)
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: themeApp(),
-        home: Scaffold(
-          body: ContainerContent(),
-        ),
-      ),
+      child: ChangeNotifierProvider(
+        create: (_) => ThemeNotifier(),
+        child: Consumer<ThemeNotifier>(
+          builder:(context, ThemeNotifier notifier, child){
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: notifier.lightTheme ? light : dark,
+              home: Scaffold(
+                body: ContainerContent(),
+              ),
+            );
+          }
+        )
+      )
     );
   }
 }

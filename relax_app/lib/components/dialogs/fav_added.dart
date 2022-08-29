@@ -8,7 +8,7 @@ class AddedToFavourites extends StatefulWidget {
 
 class _AddedToFavouritesState extends State<AddedToFavourites> {
   double _size = 0;
-  double _updateBox() {
+  double ?_updateBox() {
     setState(() {
         _size = 4;
     });
@@ -42,7 +42,7 @@ class _AddedToFavouritesState extends State<AddedToFavourites> {
               Padding(
                 padding: const EdgeInsets.only(bottom:40.0),
                 child: Text('Added to My Cards', textAlign: TextAlign.center,
-                    style: TextStyle(color: iconPrimary,fontSize: 30)
+                    style: TextStyle(color: offWhite,fontSize: 30)
                 ),
               ),
               AnimatedScale(
@@ -51,7 +51,7 @@ class _AddedToFavouritesState extends State<AddedToFavourites> {
                 curve: Curves.bounceOut,
                 child: Icon(
                     Icons.favorite,
-                    color: iconPrimary,
+                    color: offWhite,
                 ),
               ),
             ],

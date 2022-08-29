@@ -22,8 +22,6 @@ class RelaxPlayer extends StatefulWidget {
   final audioPlayer = AudioPlayer();
   final SoundDao dao = SoundDao();
   final Sound sound;
-  //var isFavourite = verifav();
-
 
   RelaxPlayer(this.sound);
 
@@ -35,9 +33,9 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
   var accessBox = LocalStorageRepository(); //Hive dB Repo
   LocalNotificationService notify= LocalNotificationService();
   int _counter = 0;   //Timer
-  Timer _timer;
-  bool _timerVisible = false;
-  bool isFavourite;   //Favourite
+  Timer? _timer;
+  bool? _timerVisible = false;
+  bool? isFavourite;   //Favourite
 
   void initState() {
     isFavourite = verifav();
@@ -56,11 +54,17 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
         });
     try {
       String url = widget.sound.audio;
-      await widget.audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(
-          url)));
+      await widget.audioPlayer.setAudioSource(
+          AudioSource.uri(Uri.parse(url)));
     } catch (e) {
       print("Error loading audio source: $e");
     }
+  }
+
+  @override
+  void dispose(){
+    widget.audioPlayer.dispose();
+    super.dispose();
   }
 
   @override
@@ -76,28 +80,62 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
     String timeCount = formatTime(_counter);
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0, right: 20),
-              child: GestureDetector(
-                onTap: () {
-                 widget.dao.delete(widget.sound.id);
-                  Navigator.pop(context);
-                  setState(() {
-                  });
-                },
-                child: Icon(
-                  Icons.settings,
-                  size: 40,
-                  color: iconPrimary,
+     /* appBar: PreferredSize(
+          preferredSize: Size.fromHeight(20),
+          child: AppBar(
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, right: 20),
+                child: GestureDetector(
+                  onTap: () {
+                   widget.dao.delete(widget.sound.id);
+                    Navigator.pop(context);
+                    setState(() {
+                    });
+                  },
+                  child: Icon(
+                    Icons.delete_forever,
+                    size: 40,
+                    color: Colors.red[600],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ),*/
         body: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0, top:50),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex:1,
+                    child: Column(
+                      children: [
+                        BackButton(
+                          onPressed: ()=>Navigator.pop(context),
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Column(
+                      children: [
+                        Text(widget.sound.name, style: TextStyle(fontSize: 28, fontWeight: FontWeight.w200)),
+                        Text(widget.sound.description),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                  flex: 1,
+                  child: Container(),
+                  )
+                ],
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
               child: Center(
@@ -110,26 +148,25 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                     borderRadius: BorderRadius.all(Radius.circular(30)),
                     color: Colors.black26,
                   ),
-                  height: 530,
+                  height: 550,
                   width: 340,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 35.0),
+              padding: const EdgeInsets.only(top: 30.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   BlocBuilder<FavouriteBloc, FavouriteState>(
                     builder: (context, state) {
                       return IconButton(
-                        icon: Icon(isFavourite
+                        icon: Icon(isFavourite!
                             ? Icons.favorite_outlined
                             : Icons.favorite_outline_outlined),
                         onPressed: () {
                           _favouriteAction(context);
                         },
-                        color: iconPrimary,
                         iconSize: 35,
                       );
                     }
@@ -147,13 +184,11 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                             return IconButton(
                               onPressed: (){},
                               icon: ProgressPlayer(),
-                              color: iconPrimary,
                               iconSize: 85,
                             );
                           }else if (playing != true) {
                             return IconButton(
                               icon: const Icon(Icons.play_circle),
-                              color: iconPrimary,
                               iconSize: 85,
                               onPressed: (){
                                 widget.audioPlayer.play();
@@ -163,9 +198,8 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                           } else{
                             return IconButton(
                               icon: const Icon(Icons.pause_circle),
-                              color: iconPrimary,
                               iconSize: 85,
-                              onPressed: widget.audioPlayer.pause,
+                              onPressed: () => widget.audioPlayer.pause(),
                             );
                           }
                         }
@@ -174,13 +208,13 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                   Column(
                     children: [
                       IconButton(
-                        icon: Icon(_timerVisible
+                        icon: Icon(_timerVisible!
                             ? Icons.timer
                             : Icons.timer_outlined),
 
                         onPressed: () {
                           showDialog(
-                              barrierColor: iconPrimary.withOpacity(0),
+                              barrierColor: offWhite.withOpacity(0),
                               context: context,
                               builder: (contextDialog) {
                                 return Column(
@@ -202,12 +236,12 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                                                   padding: const EdgeInsets.only(bottom: 15.0),
                                                   child: Text('Timer',
                                                       style: TextStyle(
-                                                        color: iconPrimary,
+                                                        color: offWhite,
                                                         fontSize: 25,
                                                         fontWeight: FontWeight.bold,
                                                       )),
                                                 ),
-                                                OptionTimer('15 min', onTap: () => setTimer(15)),
+                                                OptionTimer('15 min', onTap: () => setTimer(3)),
                                                 OptionTimer('30 min', onTap: () => setTimer(1800)),
                                                 OptionTimer('1h', onTap: () => setTimer(3600)),
                                                 OptionTimer('5h', onTap: () => setTimer(18000)),
@@ -222,14 +256,12 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
                                 );
                               });
                         },
-                        color: iconPrimary,
                         iconSize: 35,
                       ),
                       Visibility(
-                        visible: _timerVisible,
+                        visible: _timerVisible!,
                         child: Text(timeCount,
                             style: TextStyle(
-                              color: iconPrimary,
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             )),
@@ -299,7 +331,7 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
     _counter = time;
 
     if (_timer != null) {
-      _timer.cancel();
+      _timer?.cancel();
     }
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
@@ -308,10 +340,10 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
           _timerVisible = true;
           _counter--;
         } else {
-          _timerVisible = false;
-          _timer.cancel();
-          widget.audioPlayer.stop();
           notify.showNotification(0, 'Time is up', 'We turned off your card');
+          _timerVisible = false;
+          widget.audioPlayer.stop();
+          _timer?.cancel();
         }
       });
     });
@@ -320,9 +352,10 @@ class _RelaxPlayerState extends State<RelaxPlayer> {
 
 //Cancel timer
   timerCancel(){
-    setState(() {
+    setState((){
       _timerVisible = false;
-      _timer.cancel();
+      _timer?.cancel();
+      Navigator.pop(context);
     });
   }
 }

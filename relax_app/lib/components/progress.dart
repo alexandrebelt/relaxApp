@@ -13,10 +13,10 @@ class Progress extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(color: iconPrimary),
+          CircularProgressIndicator(color: offWhite),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
-            child: Text(message, style: TextStyle(color: iconPrimary)),
+            child: Text(message, style: TextStyle(color: offWhite)),
           ),
         ],
       ),
@@ -36,13 +36,12 @@ class ProgressPlayer extends StatelessWidget {
             width: 73,
               height: 73,
               decoration: BoxDecoration(
-            color: iconPrimary,
                   borderRadius: BorderRadius.all(Radius.circular(100))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  CircularProgressIndicator(color: mainBackground),
+                  CircularProgressIndicator(),
                 ],
               )
           ),

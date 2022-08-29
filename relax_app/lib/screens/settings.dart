@@ -2,7 +2,7 @@ import 'package:app_relaxante/notification_service.dart';
 import 'package:app_relaxante/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:timezone/data/latest.dart' as tz;
-
+import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
 
@@ -11,7 +11,6 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-
   final LocalNotificationService service =  LocalNotificationService();
 
   @override
@@ -25,16 +24,19 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: CustomAppBar('Settings'),
+        appBar: AppBar(
+          centerTitle: false,
+          title: CustomAppBar('Settings')
+        ),
         body: Padding(
           padding: const EdgeInsets.only(left: 25, right: 25),
           child: ListView(
             children: [
-              _SettingSwitch('Light mode (Switch test)'),
+              _SettingSwitch('Light mode'),
               _SettingOption('Notification test', onTap: () => service.showNotification(0, 'Test', 'Notification'),),
-              _SettingOption('Rate app in stores'),
-              _SettingOption('Suggest features'),
-              _SettingOption('Share Liminal'),
+              _SettingOption('Rate app in stores', onTap: () => null,),
+              _SettingOption('Suggest features', onTap: () => null,),
+              _SettingOption('Share Liminal', onTap: () => null,),
             ],
           ),
         ));
@@ -45,7 +47,7 @@ class _SettingOption extends StatelessWidget {
   final String titleOption;
   final Function onTap;
 
-  _SettingOption(this.titleOption, {@required this.onTap});
+  _SettingOption(this.titleOption, {required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,6 @@ class _SettingOption extends StatelessWidget {
         child: Text(
           titleOption,
           style: TextStyle(
-            color: iconPrimary,
             fontSize: 18,
           ),
         ),
@@ -75,27 +76,27 @@ class _SettingSwitch extends StatefulWidget {
 }
 
 class _SettingSwitchState extends State<_SettingSwitch> {
-  bool _light = false;
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return SwitchListTile(
-      activeTrackColor: iconPrimary,
-      inactiveThumbColor: mainDark,
-      activeColor: Colors.grey[400],
-      title: Text(
-        widget.titleOption,
-        style: TextStyle(
-          fontSize: 18,
-          color: iconPrimary,
-        ),
-      ),
-      value: _light,
-      onChanged: (bool value) {
-        setState(() {
-          _light = value;
-        });
+    return Consumer<ThemeNotifier>(
+      builder:(context, notifier, child){
+        return SwitchListTile(
+          activeTrackColor: lightBlue,
+          inactiveThumbColor: offWhite,
+          activeColor: Colors.grey[400],
+          title: Text(
+            widget.titleOption,
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          value: notifier.lightTheme,
+          onChanged: (bool value) {
+            notifier.toggleTheme();
+          },
+        );
       },
     );
   }

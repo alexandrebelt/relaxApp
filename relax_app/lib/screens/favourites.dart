@@ -23,7 +23,10 @@ class _FavouriteCardsState extends State<FavouriteCards> {
     // TODO: implement build
     return
     Scaffold(
-      appBar: CustomAppBar('My Cards'),
+      appBar: AppBar(
+        centerTitle: false,
+        title: CustomAppBar('My Cards'),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(right:25.0, left: 25.0),
         child: BlocBuilder<FavouriteBloc, FavouriteState>(
@@ -42,7 +45,7 @@ class _FavouriteCardsState extends State<FavouriteCards> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.55,
+                childAspectRatio: 0.60,
                 children: List.generate(state.favourite.sounds.length, (index){
                   return Cards(state.favourite.sounds[index], onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context){

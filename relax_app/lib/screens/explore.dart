@@ -18,13 +18,6 @@ class ExplorePage extends StatefulWidget {
 
 class _ExplorePageState extends State<ExplorePage> {
   final SoundDao dao = SoundDao();
-  bool _visibility = false;
-
-
-  @override
-  void initState(){
-    super.initState;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +25,21 @@ class _ExplorePageState extends State<ExplorePage> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Visibility(
-            visible: _visibility,
-            child: Padding(
-              padding: const EdgeInsets.only(right:25.0),
-              child: GestureDetector(
-                onTap: (){
-                  //defaultSounds();
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return SearchCard();
-                  }));
-                },
-                child: Icon(Icons.search, color: iconPrimary, size: 35),
-              ),
+          Padding(
+            padding: const EdgeInsets.only(right:25.0),
+            child: GestureDetector(
+              onTap: (){
+                //defaultSounds();
+                Navigator.push(context, MaterialPageRoute(builder: (context){
+                  return SearchCard();
+                }));
+              },
+              child: Icon(Icons.search, color: offWhite, size: 35),
             ),
           )
         ],
           centerTitle: false,
-          title: Text(
-            'Explore Cards',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 35,
-            ),
-          )
+          title: CustomAppBar('Explore Cards')
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
@@ -76,15 +60,14 @@ class _ExplorePageState extends State<ExplorePage> {
                 // TODO: Handle this case.
                 break;
               case ConnectionState.done:
-                final List<Sound> sounds = snapshot.data;
+                final List<Sound> sounds = snapshot.data as List<Sound>;
                 if(sounds.length != 0){
-                  _visibility = true;
                   return GridView.count(
                     primary: true,
                     crossAxisCount: 2,
                     crossAxisSpacing: 15,
                     mainAxisSpacing: 15,
-                    childAspectRatio: 0.55,
+                    childAspectRatio: 0.60,
                     children: List.generate(sounds.length, (index) {
                       return Cards(
                         sounds[index],
@@ -110,12 +93,12 @@ class _ExplorePageState extends State<ExplorePage> {
                 }
                 break;
             }
-            return Center(child: CircularProgressIndicator(color: iconPrimary));
+            return Center(child: CircularProgressIndicator(color: offWhite));
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton.large(
-        backgroundColor: iconPrimary,
+      /*floatingActionButton: FloatingActionButton.large(
+        backgroundColor: offWhite,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -136,7 +119,7 @@ class _ExplorePageState extends State<ExplorePage> {
           });
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,*/
     );
   }
 }

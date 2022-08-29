@@ -45,4 +45,28 @@ void defaultSounds(){
       'https://d9olupt5igjta.cloudfront.net/samples/sample_files/104726/a8781b0041c331a88601afe2179b626c7183b69e/mp3/_Cassette_Noise.mp3?',
       0)
   );
+  dao.save(Sound(
+      0,
+      'Beach Waves',
+      'Relaxing wave noises',
+      'https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=734&q=80',
+      'https://www.zapsplat.com/wp-content/uploads/2015/sound-effects-84577/zapsplat_nature_ocean_waves_gentle_sandy_beach_distant_surf_winter_australia_84765.mp3',
+      0)
+  );
+  dao.save(Sound(
+      0,
+      'Vinyl',
+      'Vinyl is playing but no music',
+      'https://images.unsplash.com/photo-1558584673-c834fb1cc3ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
+      'https://cdn.pixabay.com/download/audio/2021/08/02/audio_b5f0b4b595.mp3?filename=vinyl-hiss-5862.mp3',
+      0)
+  );
+  dao.save(Sound(
+      0,
+      'Nature',
+      'The nature, natural as ever',
+      'https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+      'https://cdn.pixabay.com/download/audio/2021/08/09/audio_1732f5639f.mp3?filename=forest-wind-and-birds-6881.mp3',
+      0)
+  );
 }

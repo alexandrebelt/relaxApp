@@ -44,7 +44,7 @@ class _FormUpdateSoundState extends State<FormUpdateSound> {
             padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                Text('Editar card (ADMIN ONLY)'),
+                Text('Editar card (ADMIN ONLY)',style: TextStyle(color: mainBackground)),
                 TextField(
                   controller: _nameController,
                   decoration: InputDecoration(labelText: widget.sound.name),
@@ -74,13 +74,11 @@ class _FormUpdateSoundState extends State<FormUpdateSound> {
                     final String description = _descriptionController.text;
                     final String image = _imageController.text;
                     final String audio = _audioController.text;
-                    final int favourite = int.tryParse(_favController.text);
+                    final int? favourite = int.tryParse(_favController.text);
                     final updateSound =
-                        Sound(widget.sound.id, name, description, image, audio, favourite);
+                        Sound(widget.sound.id, name, description, image, audio, favourite!);
                     if (updateSound != null) {
                       dao.update(updateSound).then((id) => Navigator.pop(context));
-                      setState(() {
-                      });
                     }
                   },
                 )
